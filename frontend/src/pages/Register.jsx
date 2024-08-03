@@ -5,9 +5,12 @@ import { FaMobileAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { useState } from "react";
 import { LuEye, LuEyeOff } from "react-icons/lu";
+import { useAuth } from "./auth";
+
 
 const Register = () => {
   const navigate = useNavigate();
+  const {storetokenInLS} = useAuth()
   
   const [visible, setVisible] = useState(false);
   const [user, setUser] = useState({
@@ -41,11 +44,8 @@ const Register = () => {
       if (response.ok) {
         navigate('/');
        
-        localStorage.setItem('id', responseData.userId);
-        localStorage.setItem('token', responseData.token);
-        localStorage.setItem('isAdmin', responseData.isAdmin);
-     
-
+        //
+          storetokenInLS(responseData.token)
         alert(responseData.message);
         setUser({
           username: "",

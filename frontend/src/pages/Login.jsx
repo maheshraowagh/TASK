@@ -3,10 +3,11 @@ import { MdEmail } from "react-icons/md";
 import { LuEye, LuEyeOff } from "react-icons/lu";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { useState } from "react";
+import { useAuth } from "./auth";
 
 const Login = () => {
-  const navigate = useNavigate();  // Correctly use the useNavigate hook
   
+
   const [visible, setVisible] = useState(false);
   const [user, setUser] = useState({
     email: "",
@@ -19,6 +20,9 @@ const Login = () => {
     setUser({ ...user, [name]: value });
   };
 
+  const navigate = useNavigate();  
+  const { storetokenInLS} = useAuth()
+
   const handleSubmit = async (e) => {
     e.preventDefault();
    
@@ -30,22 +34,23 @@ const Login = () => {
         },
         body: JSON.stringify(user),
       });
-      const responseData = await response.json();
-      console.log(responseData);
+    const responseData = await response.json();
+    storetokenInLS(responseData.token)
+        console.log(responseData);
+      
 
       if (response.ok) {
+        alert("Login successfully");
         setUser({
           email: "",
           password: ""
         });
-        alert("Login successfully");
        
-        localStorage.setItem('id', responseData.userId);
-        localStorage.setItem('token', responseData.token);
-        localStorage.setItem('isAdmin', responseData.isAdmin);
         navigate('/');
+        
+      
       } else {
-        console.log(responseData.extraDetails || responseData.message);
+        console.log('error');
       }
     } catch (error) {
       console.log(error.message);

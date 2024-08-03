@@ -1,20 +1,15 @@
-import { useState, useEffect } from "react";
+
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../pages/auth";
 
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
 
-  const isAdmin = localStorage.getItem("isAdmin")
+  const {isLoggedIn} = useAuth()
+  
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userId");
-    setIsLoggedIn(false);
-  };
+ 
 
-  useEffect(() => {
-    setIsLoggedIn(!!localStorage.getItem('token'));
-  }, []);
+  
 
   return (
     <div className="flex justify-between items-center px-10 py-4 bg-blue-300">
@@ -34,42 +29,37 @@ const Navbar = () => {
             <li>All Products</li>
           </NavLink>
 
-          {isAdmin?(
+        
           <li>
             <NavLink to='/admin'>
               Admin
             </NavLink>
           </li>
-        ):""}
+        
 
-          {isLoggedIn ? (
-            <li>
-              <button
-                className="bg-blue-400 text-2xl border-2 font-bold py-1 px-3 focus:outline-none hover:bg-gray-200 rounded"
-                onClick={handleLogout}
-              >
-                Logout
-              </button>
+{isLoggedIn? (
+            <li className="px-3 mr-3">
+          <NavLink to="/logout">
+            Logout
+          </NavLink>
+          </li>
+        ) : (
+          <>
+          <li>
+            <NavLink to="/Login">
+              Login
+            </NavLink>
             </li>
-          ) : (
-            <>
-              <NavLink to="/Login">
-                <li>
-                  <button className="bg-blue-400 text-2xl border-2 font-bold py-1 px-3 focus:outline-none hover:bg-gray-200 rounded">
-                    Login
-                  </button>
-                </li>
-              </NavLink>
 
-              <NavLink to="/Register">
-                <li>
-                  <button className="bg-blue-400 text-2xl border-2 font-bold py-1 px-3 focus:outline-none hover:bg-gray-200 rounded">
-                    Register
-                  </button>
-                </li>
-              </NavLink>
-            </>
-          )}
+            <li>
+            <NavLink to="/register">
+              Register
+            </NavLink>
+            </li>
+           
+          </>
+          
+        )}
         </ul>
       </div>
     </div>

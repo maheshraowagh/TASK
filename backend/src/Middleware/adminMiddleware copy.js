@@ -1,9 +1,19 @@
-const adminMiddleware = (req, res, next) => {
-    if (!req.user || !req.user.isAdmin) {
-      return res.status(403).json({ message: 'Access denied. User is not an Admin' });
-    }
-    next();
-  };
-  
-  module.exports = adminMiddleware;
-  
+
+
+
+const adminMiddleware = async(req,res,next) =>{
+
+  try {
+       console.log(req.user);
+      const adminRole = req.user.isAdmin;
+      if(!adminRole){
+          return res.status(403).json({message:"Access denied. User is not an Admin"})
+      }
+       next()
+  } catch (error) {
+      next(error)
+  }
+}
+
+
+module.exports = adminMiddleware
