@@ -1,15 +1,8 @@
-
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../pages/auth";
 
 const Navbar = () => {
-
-  const {isLoggedIn} = useAuth()
-  
-
- 
-
-  
+  const { isLoggedIn , isAdmin } = useAuth();
 
   return (
     <div className="flex justify-between items-center px-10 py-4 bg-blue-300">
@@ -29,37 +22,35 @@ const Navbar = () => {
             <li>All Products</li>
           </NavLink>
 
-        
-          <li>
-            <NavLink to='/admin'>
-              Admin
-            </NavLink>
-          </li>
-        
-
-{isLoggedIn? (
-            <li className="px-3 mr-3">
-          <NavLink to="/logout">
-            Logout
-          </NavLink>
-          </li>
-        ) : (
-          <>
-          <li>
-            <NavLink to="/Login">
-              Login
-            </NavLink>
-            </li>
-
+          {isAdmin && (
             <li>
-            <NavLink to="/register">
-              Register
-            </NavLink>
+              <NavLink to="/admin">
+                Admin
+              </NavLink>
             </li>
-           
-          </>
-          
-        )}
+          )}
+
+          {isLoggedIn  ? (
+            <li className="px-3 mr-3">
+              <NavLink to="/logout">
+                Logout
+              </NavLink>
+            </li>
+          ) : (
+            <>
+              <li>
+                <NavLink to="/Login">
+                  Login
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink to="/register">
+                  Register
+                </NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </div>

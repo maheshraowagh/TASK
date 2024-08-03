@@ -35,17 +35,19 @@ const Login = () => {
         body: JSON.stringify(user),
       });
     const responseData = await response.json();
-    storetokenInLS(responseData.token)
+    console.log(responseData)
+    storetokenInLS(responseData)
+    
         console.log(responseData);
       
 
       if (response.ok) {
-        alert("Login successfully");
+       
         setUser({
           email: "",
           password: ""
         });
-       
+        alert("Login successfully");
         navigate('/');
         
       

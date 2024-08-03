@@ -1,4 +1,4 @@
-import { NavLink, Navigate, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { IoFileTrayFullSharp,IoHomeSharp } from "react-icons/io5";
 
 
@@ -7,9 +7,7 @@ const AdminLayout = () => {
 
   
 
-  if(! localStorage.getItem('isAdmin')){
-    return <Navigate to='/'/>
-  }
+  
   return (
     <div className="md:flex ">
       {/* Admin Sidebar */}
@@ -27,6 +25,16 @@ const AdminLayout = () => {
          <NavLink to={`/admin/AddProducts`}>
           <button className=" px-4 py-2 text-sm md:text-xl flex items-center gap-1 md:gap-2 font-medium text-white hover:bg-gray-700"><IoFileTrayFullSharp /> Add PRODUCT</button>
          </NavLink>
+
+         <NavLink to={`/admin/AddCategory`}>
+          <button className=" px-4 py-2 text-sm md:text-xl flex items-center gap-1 md:gap-2 font-medium text-white hover:bg-gray-700"><IoFileTrayFullSharp /> Add Category</button>
+         </NavLink>
+        
+
+         <NavLink to={`/admin/AddBrand`}>
+          <button className=" px-4 py-2 text-sm md:text-xl flex items-center gap-1 md:gap-2 font-medium text-white hover:bg-gray-700"><IoFileTrayFullSharp /> Add Brand</button>
+         </NavLink>
+        
         
             
             </li>

@@ -6,10 +6,13 @@ export const AuthContext = createContext();
 export const AuthProvider = ({children})=>{
 
     const [token, setToken] = useState(localStorage.getItem("token"))
+    const[isAdmin, setIsAdmin] = useState(localStorage.getItem("isAdmin"))
 
 const storetokenInLS =(serverToken)=>{
-    setToken( serverToken);
-  return localStorage.setItem("token", serverToken)
+    console.log(serverToken)
+    setToken( serverToken.token);
+    setIsAdmin(serverToken.isAdmin)
+  return localStorage.setItem("token", serverToken.token)
 }
 
 let isLoggedIn = !!token;
@@ -20,7 +23,7 @@ const LogoutUser = ()=>{
 }
 
 
-return (<AuthContext.Provider value={{storetokenInLS,LogoutUser,isLoggedIn}}>
+return (<AuthContext.Provider value={{storetokenInLS,LogoutUser,isLoggedIn,isAdmin}}>
     {children}
 </AuthContext.Provider>)
 }

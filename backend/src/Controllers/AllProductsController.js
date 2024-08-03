@@ -1,5 +1,8 @@
 const Product = require("../Models/AllProducts");
 
+
+
+
 const AllProducts = async (req, res) => {
   try {
     const response = await Product.find();
@@ -14,4 +17,4 @@ const AllProducts = async (req, res) => {
   }
 };
 
-module.exports = { AllProducts };
+module.exports = { AllProducts};

@@ -10,6 +10,8 @@ import Logout from "./pages/Logout"
 import AdminLayout from "./Components/AdminLayout"
 import AdminHero from "./pages/AdminHero"
 import AddAdminProducts from "./pages/AddAdminProducts"
+import AddAdminCategory from "./pages/AddAdminCategory"
+import AddAdminBrand from "./pages/AddAdminBrand"
 
 const App = () => {
   return (
@@ -27,6 +29,8 @@ const App = () => {
  <Route path="/admin" element ={<AdminLayout/>}>
  <Route index element={<AdminHero/> } />
  <Route path="AddProducts" element={<AddAdminProducts/>}/>
+ <Route path="AddCategory" element={<AddAdminCategory/>}/>
+ <Route path="AddBrand" element={<AddAdminBrand/>}/>
  </Route>
 
 
